@@ -1,7 +1,3 @@
-
-
-
-
 var losses = 0;
 var wins = 0;
 var totalScore = 0;
@@ -19,26 +15,46 @@ function randomInRange(min, max) {
 
 
 for (var i = 0; i < 4; i++) {
-  $("#crystal" + i).attr("data-value", i);
+  $("#crystal" + i).attr("data-value", numberOptions[i]);
 }
 
 $(".crystal-pic").on("click", function() {
-  alert($(this).attr("data-value"));
+  totalScore += parseInt($(this).attr("data-value"))
+  $("#total-score").text(totalScore);
+  check()
 });
 
-totalScore += parseInt($(this).attr("data-value"))
-$("#total-score").text(targetNumber);
+$("#target-Number").text(targetNumber);
 
+
+function check() {
 if (totalScore === targetNumber) {
   wins++
-  $("#").text();
+  $("#Wins").text(wins);
   reset()
 }
 
 else if (totalScore > targetNumber) {
   losses++ 
-  $("#").text();
+  $("#Losses").text(losses);
   reset()
+}
+}
+
+function reset() {
+  totalScore = 0
+  $("#total-score").text(totalScore)
+  targetNumber = randomInRange(19, 120)
+  $("#target-Number").text(targetNumber)
+  numberOptions = [
+    randomInRange(1, 12),
+    randomInRange(1, 12),
+    randomInRange(1, 12),
+    randomInRange(1, 12)
+  ]
+  for (var i = 0; i < 4; i++) {
+    $("#crystal" + i).attr("data-value", numberOptions[i]);
+  }
 }
 
 // I did the best I could for some reason my target number is showing in my total score and 
